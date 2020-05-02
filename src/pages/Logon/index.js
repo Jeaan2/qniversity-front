@@ -4,26 +4,26 @@ import { Link, useHistory } from 'react-router-dom'
  import qniversity from '../assets/qniversity1.png';
 import logoImg from '../assets/logo.svg';
 import {FiLogIn} from 'react-icons/fi';
-// import api from '../../services/api';
+import api from '../../services/api';
 
 export default function Logon() {
 
-    const [id, setId] = useState('')
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+
     const history = useHistory();
 
     async function handleLogin(e) {
-        // e.preventDefault();
+        e.preventDefault();
 
-        // try {
-        //     const response = await api.post('sessions', { id });
+        try {
+            const response = await api.post('auth', { email, senha });
 
-        //     localStorage.setItem('ongId', id);
-        //     localStorage.setItem('ongName', response.data.name);
+            console.log("Resposta: "+response);
 
-        //     history.push('/profile')
-        // } catch {
-        //     alert('Falha no Login, tente novamente.')
-        // }
+        } catch(err) {
+            alert('Falha no Login, tente novamente.'+JSON.stringify(err))
+        }
     }
     return (
        <div className="logon-container">
@@ -34,13 +34,14 @@ export default function Logon() {
                 <h1> Faça seu Login </h1>
                 <input 
                 placeholder="Seu E-mail"
-                value={id}
-                onChange={e => setId(e.target.value)}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 />
                 <input 
                 placeholder="Sua Senha"
-                value={id}
-                onChange={e => setId(e.target.value)}
+                value={senha}
+                type="password"
+                onChange={e => setSenha(e.target.value)}
                 />
                 <button className="button" type="submit">Entrar</button>
 
