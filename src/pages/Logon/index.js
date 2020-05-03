@@ -16,14 +16,17 @@ export default function Logon() {
     async function handleLogin(e) {
         e.preventDefault();
 
-        try {
-            const response = await api.post('auth', { email, senha });
+        history.push('/main')
 
-            console.log("Resposta: "+response);
+        // try {
+        //     const response = await api.post('auth', { email, senha });
 
-        } catch(err) {
-            alert('Falha no Login, tente novamente.'+JSON.stringify(err))
-        }
+        //     console.log("Resposta: "+response);
+        //     history.push('/main')
+
+        // } catch(err) {
+        //     alert('Falha no Login, tente novamente.'+JSON.stringify(err))
+        // }
     }
     return (
        <div className="logon-container">
