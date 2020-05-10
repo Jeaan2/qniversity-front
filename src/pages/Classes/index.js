@@ -7,7 +7,7 @@ import api from '../../services/api'
 
 import logoImg from '../assets/logo.svg';
 
-export default function Main() {
+export default function Classes() {
     const history = useHistory();
     const [turmas, setTurmas] = useState([]);
 
@@ -42,16 +42,16 @@ export default function Main() {
         <div className="profile-container">
             <header>
                 <img src={logoImg} alt="Be the Hero" />
-                <span> Bem vindo, prof. {} </span>
+                
 
-                <Link className="button" to="/newcourse"> Cadastrar novo curso </Link>
+                <Link className="button" to="/newclass"> Cadastrar nova turma </Link>
                 
                 <button onClick={() => handleLogout()} type="button" >
                     <FiPower size={18} color="#E02041"/>
                 </button>
             </header>
 
-            <h1> Cursos </h1>
+            <h1> Turmas </h1>
             <ul>
             <li>
                <Link className="card-link" to="/course/"> 

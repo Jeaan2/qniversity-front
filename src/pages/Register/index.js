@@ -37,7 +37,7 @@ export default function Register() {
         console.log(data);
 
         try {
-            const response = await api.post('api/cadastrar-usuario', data)
+            const response = await api.post('api/professor', data)
             console.log("Response: "+JSON.stringify(response))
 
             history.push('/');
