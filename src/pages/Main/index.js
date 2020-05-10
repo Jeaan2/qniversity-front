@@ -9,31 +9,19 @@ import logoImg from '../assets/logo.svg';
 
 export default function Main() {
     const history = useHistory();
-    const [turmas, setTurmas] = useState([]);
+    const [cursos, setCursos] = useState([]);
 
     useEffect(() => {
-        // api.get('profile', {
-        //     headers: {
-        //         Authorization: ongId,
-        //     }
-        // }).then(response => {
-        //     setIncidents(response.data);
-        // })
+        api.get('api/cursos', {
+            headers: {
+                Authorization: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWxpY2VuLnJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNVQVJJTyIsImNyZWF0ZWQiOjE1ODkxMzk2NzQ1NDIsImV4cCI6MTU4OTc0NDQ3NH0.wuqAShH1-pNZnjnufAvtFm6BxQsmRzBqY0w_3m_gIus00RO2eagjQNz3M4dG1brTBrkzyYtgricUCYwPBhSX8Q"
+            } //TODO mudar depois que criar a session
+        }).then(response => {
+            console.log("response: "+JSON.stringify(response.data))
+            setCursos(response.data);
+        })
     }, []);
 
-   async function handleDeleteIncident(id) {
-        // try { 
-        //  await api.delete(`incidents/${id}`, {
-        //      headers: {
-        //          Authorization: ongId,
-        //      }
-        //  });
-
-        //  setIncidents(incidents.filter( incident => incident.id !== id));
-        // } catch {
-        //     alert("Erro ao deletar caso, tente novamente.")
-        // }
-    }
     function handleLogout() {
         localStorage.clear();
         history.push('/');
@@ -42,7 +30,7 @@ export default function Main() {
         <div className="profile-container">
             <header>
                 <img src={logoImg} alt="Be the Hero" />
-                <span> Bem vindo, prof. {} </span>
+                <span> Bem vindo, professor! {} </span>
 
                 <Link className="button" to="/newcourse"> Cadastrar novo curso </Link>
                 
@@ -53,48 +41,17 @@ export default function Main() {
 
             <h1> Cursos </h1>
             <ul>
-            <li>
-               <Link className="card-link" to="/course/"> 
-                    <strong>Análise e Desenvolvimento de Sistemas  </strong>
-                    <p> 6 períodos </p>
-                </Link>
-            </li>
-                {/* <li >
-                    <strong>Curso </strong>
-                    <p>Engenharia da Computação </p>
-
-                    <button onClick={() => {}}type="button">
-                        <FiTrash2 size={20} color="a8a8b3"/>
-                    </button>
-                </li> */}
-                {/* <li  onClick= { () => {console.log("CLICOU")}}>
-                    <strong>Curso </strong>
-                    <p>Aplicativos móveis e computação em Nuvem </p>
-
+            {/* {cursos.map(curso => (
+                    <li>
+                    <Link className="card-link" to="/course/"> 
+                            <strong>curso.nome </strong>
+                            <p>curso.qtdPeriodos </p>
+                    </Link>
+                    </li>
                     
-                    <button onClick={() => {}}type="button">
-                        <FiTrash2 size={20} color="a8a8b3"/>
-                    </button>
-                </li> */}
-
+                ))} */}
             </ul>
         </div>
     )
 }
 
-{/* {incidents.map(incident => (
-                    <li key ={incident.id} >
-                    <strong>CASO: </strong>
-                    <p> {incident.title}</p>
-
-                    <strong> DESCRIÇÃO: </strong>
-                    <p>{incident.description}</p>
-
-                    <strong> VALOR:</strong>
-                    <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL'}).format(incident.value)}</p>
-
-                    <button onClick={() => handleDeleteIncident(incident.id)}type="button">
-                        <FiTrash2 size={20} color="a8a8b3"/>
-                    </button>
-                </li>
-                ))} */}

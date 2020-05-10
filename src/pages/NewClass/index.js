@@ -41,7 +41,7 @@ export default function NewClass() {
         <div className="new-incident-container">
             <div className="content">
                 <section>
-                   <img src={logoImg} alt="Be The Hero"/>
+                   
                    <h1>Cadastrar nova turma</h1>
                    {/* <p>Descreva o caso detalhadamente para encontrar um herói para resolver isso. </p> */}
 
@@ -53,7 +53,7 @@ export default function NewClass() {
 
                 <form  onSubmit={handleNewIncident}>
                     <input 
-                    placeholder="Título do Caso"
+                    placeholder="Nome da Turma"
                     value={title}
                     onChange={(e => setTitle(e.target.value))}
                     />
@@ -62,11 +62,7 @@ export default function NewClass() {
                     value={description}
                     onChange={(e => setDescription(e.target.value))}
                     />
-                    <input 
-                    placeholder="Valor em reais"
-                    value={value}
-                    onChange={(e => setValue(e.target.value))}
-                    />
+                    {/* TODO colocar um "spinner" para seleção do curso a ser vinculado*/}
                         
                     <button className="button" type="submit">Cadastrar </button>
                 </form>

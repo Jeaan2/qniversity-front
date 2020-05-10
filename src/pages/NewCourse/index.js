@@ -14,7 +14,7 @@ export default function NewCourse() {
 
     const ongId = localStorage.getItem('ongId');
 
-    function handleNewIncident(e) {
+    function handleNewCourse(e) {
         e.preventDefault();
 
         const data = {
@@ -23,10 +23,10 @@ export default function NewCourse() {
         };
 
         try {
-            api.post('incidents', data, {
+            api.post('api/cursos', data, {
                 headers: {
-                    Authorization: ongId
-                }
+                    Authorization: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWxpY2VuLnJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNVQVJJTyIsImNyZWF0ZWQiOjE1ODkxMzk2NzQ1NDIsImV4cCI6MTU4OTc0NDQ3NH0.wuqAShH1-pNZnjnufAvtFm6BxQsmRzBqY0w_3m_gIus00RO2eagjQNz3M4dG1brTBrkzyYtgricUCYwPBhSX8Q"
+                } //TODO Mudar para  token da session 
             });
 
             history.push('/profile')
@@ -39,7 +39,7 @@ export default function NewCourse() {
         <div className="new-incident-container">
             <div className="content">
                 <section>
-                   <img src={logoImg} alt="Be The Hero"/>
+                   {/* <img src={logoImg} alt="Be The Hero"/> */}
                    <h1>Cadastrar novo curso</h1>
                    <p>Descreva as informações do curso. Nele você adicionará turmas e turnos após concluir o cadastro. </p>
 
@@ -49,7 +49,7 @@ export default function NewCourse() {
                  </Link>
                 </section>
 
-                <form  onSubmit={handleNewIncident}>
+                <form  onSubmit={handleNewCourse}>
                     <input 
                     placeholder="Nome do curso"
                     value={nome}
