@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import { Link, useHistory } from 'react-router-dom'
  import qniversity from '../assets/qniversity1.png';
@@ -7,6 +7,16 @@ import {FiLogIn} from 'react-icons/fi';
 import api from '../../services/api';
 
 export default function Logon() {
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+
+        setToken(localStorage.getItem('token'))
+        if(token != '') {
+            history.push('/main');
+        }
+
+    }, [])
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -19,7 +29,9 @@ export default function Logon() {
         try {
             const response = await api.post('auth', { email, senha });
 
-            console.log("Resposta: "+response);
+            console.log("TOKEN: "+response.data.data.token)
+            localStorage.setItem('token', response.data.data.token)
+            console.log("Resposta: "+JSON.stringify(response));
             history.push('/main')
 
         } catch(err) {

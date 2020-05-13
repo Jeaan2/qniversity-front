@@ -30,7 +30,6 @@ export default function Register() {
             nome, 
             sobrenome,
             email,
-            cpf,
             senha
         }
 
@@ -72,11 +71,7 @@ export default function Register() {
                         value={sobrenome}
                         onChange={e => setSobrenome(e.target.value)}
                     />
-                     <input 
-                    placeholder="CPF"
-                    value={cpf}
-                    onChange={e => setCpf(e.target.value)} />
-
+                    
                     <input 
                     type="email" 
                     placeholder="E-mail"

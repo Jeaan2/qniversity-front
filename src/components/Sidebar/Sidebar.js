@@ -16,6 +16,10 @@ export default props => {
         <a className="menu-item" href="/questionbank">
           Banco de questões
         </a>
+
+        <a className="menu-item" href="/quizzes">
+          Quizzes
+        </a>
   
       </Menu>
     );

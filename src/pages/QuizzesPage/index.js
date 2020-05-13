@@ -7,18 +7,18 @@ import api from '../../services/api'
 
 import logoImg from '../assets/logo.svg';
 
-export default function Classes() {
+export default function Quizzes() {
     const history = useHistory();
-    const [turmas, setTurmas] = useState([]);
+    const [quizzes, setQuizzes] = useState([]);
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-       api.get('api/turmas', { 
+       api.get('api/quizzes', { 
            headers: {
                Authorization: token
            }
        }).then(response => {
-           setTurmas(response.data.data);
+           setQuizzes(response.data.data);
        })
     }, []);
 
@@ -34,20 +34,21 @@ export default function Classes() {
                 <img src={logoImg} alt="Be the Hero" />
                 
 
-                <Link className="button" to="/newclass"> Cadastrar nova turma </Link>
+                <Link className="button" to="/newquiz"> Cadastrar novo quiz </Link>
                 
                 <button onClick={() => handleLogout()} type="button" >
                     <FiPower size={18} color="#E02041"/>
                 </button>
             </header>
 
-            <h1> Turmas </h1>
+            <h1> Quizzes </h1>
             <ul>
-            {turmas.map(turma => (
-                    <li key={turma.id}>
+            {quizzes.map(quiz => (
+                    <li key={quiz.id}>
                     <Link className="card-link" to="/course/"> 
-                            <strong>{turma.nome} </strong>
-                            {/* <p>{curso.qtdPeriodos} períodos</p> */}
+                            <strong>{quiz.nome} </strong>
+                            <p>{quiz.descricao} períodos</p>
+                            { quiz.ativo ? <p>Ativo</p> : ''}
                     </Link>
                     </li>
                     

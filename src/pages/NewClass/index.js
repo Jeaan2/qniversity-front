@@ -45,9 +45,9 @@ export default function NewClass() {
                    <h1>Cadastrar nova turma</h1>
                    {/* <p>Descreva o caso detalhadamente para encontrar um herói para resolver isso. </p> */}
 
-                   <Link className="back-link" to="/profile">
+                   <Link className="back-link" to="/classes">
                     <FiArrowLeft size={16} color="#E02041" />
-                    Voltar para home
+                    Voltar para turmas
                  </Link>
                 </section>
 
@@ -57,12 +57,13 @@ export default function NewClass() {
                     value={title}
                     onChange={(e => setTitle(e.target.value))}
                     />
-                    <textarea 
-                    placeholder="Descrição do caso"
+                    <select 
+                    placeholder="Curso"
                     value={description}
                     onChange={(e => setDescription(e.target.value))}
                     />
-                    {/* TODO colocar um "spinner" para seleção do curso a ser vinculado*/}
+                    
+                    
                         
                     <button className="button" type="submit">Cadastrar </button>
                 </form>

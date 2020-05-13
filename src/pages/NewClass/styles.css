@@ -47,6 +47,11 @@
       margin-top: 8px;
   
   }
+  .new-incident-container .content form select {
+    margin-top: 8px;
+
+}
+
   .new-incident-container .content form textarea {
       margin-top: 8px;
   

@@ -9,31 +9,19 @@ import logoImg from '../assets/logo.svg';
 
 export default function QuestionBank() {
     const history = useHistory();
-    const [turmas, setTurmas] = useState([]);
+    const [questoes, setQuestoes] = useState([]);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        // api.get('profile', {
-        //     headers: {
-        //         Authorization: ongId,
-        //     }
-        // }).then(response => {
-        //     setIncidents(response.data);
-        // })
+        api.get('api/questoes', {
+            headers: {
+                Authorization: token
+            }
+        }).then(response => {
+            setQuestoes(response.data.data);
+        })
     }, []);
 
-   async function handleDeleteIncident(id) {
-        // try { 
-        //  await api.delete(`incidents/${id}`, {
-        //      headers: {
-        //          Authorization: ongId,
-        //      }
-        //  });
-
-        //  setIncidents(incidents.filter( incident => incident.id !== id));
-        // } catch {
-        //     alert("Erro ao deletar caso, tente novamente.")
-        // }
-    }
     function handleLogout() {
         localStorage.clear();
         history.push('/');
@@ -53,48 +41,17 @@ export default function QuestionBank() {
 
             <h1> Questões </h1>
             <ul>
-            <li>
-               <Link className="card-link" to="/course/"> 
-                    <strong>Análise e Desenvolvimento de Sistemas  </strong>
-                    <p> 6 períodos </p>
-                </Link>
-            </li>
-                {/* <li >
-                    <strong>Curso </strong>
-                    <p>Engenharia da Computação </p>
-
-                    <button onClick={() => {}}type="button">
-                        <FiTrash2 size={20} color="a8a8b3"/>
-                    </button>
-                </li> */}
-                {/* <li  onClick= { () => {console.log("CLICOU")}}>
-                    <strong>Curso </strong>
-                    <p>Aplicativos móveis e computação em Nuvem </p>
-
+                {questoes.map(questao => (
+                    <li key={questao.id}>
+                    <Link className="card-link" to="/course/"> 
+                            <strong>{questao.descricao} </strong>
+                            <p>Nivel: {questao.nivel}</p>
+                            {/* <p>{questao.respostas[]} questões</p> */}
+                    </Link>
+                    </li>
                     
-                    <button onClick={() => {}}type="button">
-                        <FiTrash2 size={20} color="a8a8b3"/>
-                    </button>
-                </li> */}
-
+                ))}
             </ul>
         </div>
     )
 }
-
-{/* {incidents.map(incident => (
-                    <li key ={incident.id} >
-                    <strong>CASO: </strong>
-                    <p> {incident.title}</p>
-
-                    <strong> DESCRIÇÃO: </strong>
-                    <p>{incident.description}</p>
-
-                    <strong> VALOR:</strong>
-                    <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL'}).format(incident.value)}</p>
-
-                    <button onClick={() => handleDeleteIncident(incident.id)}type="button">
-                        <FiTrash2 size={20} color="a8a8b3"/>
-                    </button>
-                </li>
-                ))} */}

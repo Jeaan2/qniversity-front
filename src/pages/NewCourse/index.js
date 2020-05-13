@@ -12,7 +12,7 @@ export default function NewCourse() {
     const [qtdPeriodos, setQtdPeriodos] = useState('');
     const history = useHistory();
 
-    const ongId = localStorage.getItem('ongId');
+    const token = localStorage.getItem('token');
 
     function handleNewCourse(e) {
         e.preventDefault();
@@ -25,11 +25,11 @@ export default function NewCourse() {
         try {
             api.post('api/cursos', data, {
                 headers: {
-                    Authorization: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWxpY2VuLnJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNVQVJJTyIsImNyZWF0ZWQiOjE1ODkxMzk2NzQ1NDIsImV4cCI6MTU4OTc0NDQ3NH0.wuqAShH1-pNZnjnufAvtFm6BxQsmRzBqY0w_3m_gIus00RO2eagjQNz3M4dG1brTBrkzyYtgricUCYwPBhSX8Q"
-                } //TODO Mudar para  token da session 
+                    Authorization: localStorage.getItem('token')
+                } 
             });
 
-            history.push('/profile')
+            history.push('/main')
 
         } catch(err) {
             alert("Erro ao cadastrar turma, tente novamente")

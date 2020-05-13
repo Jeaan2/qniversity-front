@@ -12,13 +12,15 @@ export default function Main() {
     const [cursos, setCursos] = useState([]);
 
     useEffect(() => {
+
+          const token = localStorage.getItem('token');
         api.get('api/cursos', {
             headers: {
-                Authorization: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3YWxpY2VuLnJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNVQVJJTyIsImNyZWF0ZWQiOjE1ODkxMzk2NzQ1NDIsImV4cCI6MTU4OTc0NDQ3NH0.wuqAShH1-pNZnjnufAvtFm6BxQsmRzBqY0w_3m_gIus00RO2eagjQNz3M4dG1brTBrkzyYtgricUCYwPBhSX8Q"
+                Authorization: localStorage.getItem('token')
             } //TODO mudar depois que criar a session
         }).then(response => {
             console.log("response: "+JSON.stringify(response.data))
-            setCursos(response.data);
+            setCursos(response.data.data);
         })
     }, []);
 
@@ -41,15 +43,15 @@ export default function Main() {
 
             <h1> Cursos </h1>
             <ul>
-            {/* {cursos.map(curso => (
-                    <li>
+            {cursos.map(curso => (
+                    <li key={curso.id}>
                     <Link className="card-link" to="/course/"> 
-                            <strong>curso.nome </strong>
-                            <p>curso.qtdPeriodos </p>
+                            <strong>{curso.nome} </strong>
+                            <p>{curso.qtdPeriodos} períodos</p>
                     </Link>
                     </li>
                     
-                ))} */}
+                ))}
             </ul>
         </div>
     )
