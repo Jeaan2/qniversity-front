@@ -32,6 +32,7 @@ export default function NewQuiz() {
     const classes = useStyles();
     const [questoes, setQuestoes] = useState([]);
     const [questoesIds, setQuestoesIds] = useState([]);
+    const [ativo, setAtivo] = useState(true);
     const token = localStorage.getItem('token');
 
     useEffect(() => {
@@ -57,6 +58,14 @@ export default function NewQuiz() {
     setQuestoesIds(newChecked);
   };
 
+    function handleChecked() {
+        if (ativo) {
+            setAtivo(false)
+        } else {
+            setAtivo(true)
+        }
+    }
+
 
     function handleNewQuiz(e) {
         e.preventDefault();
@@ -67,6 +76,7 @@ export default function NewQuiz() {
         const data = { 
             nome,
             descricao,
+            ativo,
             questoesIds: questoesIds.map(function (questao) {
                 return questao.id
             })
@@ -111,6 +121,17 @@ export default function NewQuiz() {
                     value={descricao}
                     onChange={(e => setDescricao(e.target.value))}
                     />
+                    <div>
+                     <Checkbox
+                        edge="start"
+                        checked={ativo}
+                        onChange={handleChecked}
+                        tabIndex={-1}
+                        disableRipple
+                        // inputProps={{ 'aria-labelledby': labelId }}
+                    />
+                    <p>Ativo</p>
+                    </div>
                     <p>Perguntas</p>
                     <List className={classes.root}>
                         {questoes.map((questao) => {
