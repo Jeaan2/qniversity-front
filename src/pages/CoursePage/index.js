@@ -7,18 +7,21 @@ import api from '../../services/api'
 
 import logoImg from '../assets/logo.svg';
 
-export default function Quizzes() {
+export default function CoursePage() {
     const history = useHistory();
-    const [quizzes, setQuizzes] = useState([]);
+    const [turmas, setTurmas] = useState([]);
     const token = localStorage.getItem('token');
+    const [curso, setCurso] = useState('');
 
     useEffect(() => {
-       api.get('api/quizzes', { 
+        // setCurso(this.props.location.curso)
+        // console.log("curso:"+JSON.stringify(this.props.location.curso))
+       api.get('api/turmas', { 
            headers: {
                Authorization: token
            }
        }).then(response => {
-           setQuizzes(response.data.data);
+           setTurmas(response.data.data);
        })
     }, []);
 
@@ -34,21 +37,20 @@ export default function Quizzes() {
                 <img src={logoImg} alt="Be the Hero" />
                 
 
-                <Link className="button" to="/newquiz"> Cadastrar novo quiz </Link>
+                {/* <Link className="button" to="/newclass"> Cadastrar nova turma </Link> */}
                 
                 <button onClick={() => handleLogout()} type="button" >
                     <FiPower size={18} color="#E02041"/>
                 </button>
             </header>
 
-            <h1> Quizzes </h1>
+            <h1> Turmas </h1>
             <ul>
-            {quizzes.map(quiz => (
-                    <li key={quiz.id}>
-                    <Link className="card-link" to="/quiz/"> 
-                            <strong>{quiz.nome} </strong>
-                            <p>{quiz.descricao}</p>
-                            { quiz.ativo ? <p>Ativo</p> : ''}
+            {turmas.map(turma => (
+                    <li key={turma.id}>
+                    <Link className="card-link" to="/course/"> 
+                            <strong>{turma.nome} </strong>
+                            {/* <p>{curso.qtdPeriodos} períodos</p> */}
                     </Link>
                     </li>
                     

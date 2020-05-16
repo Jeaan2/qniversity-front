@@ -1,37 +1,55 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import { Link, useHistory} from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi';
 import api from '../../services/api';
-
+import Select from 'react-select';
 import './styles.css'
 
 import logoImg from '../assets/logo.svg';
 
 export default function NewClass() {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [value, setValue] = useState('');
+    const [nome, setNome] = useState('');
+    const [cursos, setCursos] = useState([]);
+    const [curso, setCurso] = useState('');
+    const [turnos, setTurnos] = useState([{ value: 1, label: "Matutino" }, { value: 2, label: "Vespertino"}, {value: 3, label: "Noturno"}])
+    const [turno, setTurno] = useState('');
     const history = useHistory();
+    const token = localStorage.getItem('token');
 
-    const ongId = localStorage.getItem('ongId');
+    useEffect(() => {
+        
+        api.get('api/cursos', {
+            headers: {
+                Authorization: localStorage.getItem('token')
+            } //TODO mudar depois que criar a session
+        }).then(response => {
+            console.log("response: "+JSON.stringify(response.data))
+            setCursos(response.data.data);
+        })
+    }, [])
+    
+    let selectCursos = cursos.map(function (curso) {
+        return {value: curso.id, label: curso.nome}
+    })
 
-    function handleNewIncident(e) {
+    function handleNewClass(e) {
         e.preventDefault();
 
         const data = {
-            title,
-            description,
-            value
+            nome,
+            id: 123,
+            cursoId: curso,
+            turnoId: turno
         };
 
         try {
-            api.post('incidents', data, {
+            api.post('/api/turmas', data, {
                 headers: {
-                    Authorization: ongId
+                    Authorization: token
                 }
             });
 
-            history.push('/profile')
+            // history.push('/')
 
         } catch(err) {
             alert("Erro ao cadastrar turma, tente novamente")
@@ -51,16 +69,29 @@ export default function NewClass() {
                  </Link>
                 </section>
 
-                <form  onSubmit={handleNewIncident}>
+                <form  onSubmit={handleNewClass}>
                     <input 
                     placeholder="Nome da Turma"
-                    value={title}
-                    onChange={(e => setTitle(e.target.value))}
+                    value={nome}
+                    onChange={(e => setNome(e.target.value))}
                     />
-                    <select 
-                    placeholder="Curso"
-                    value={description}
-                    onChange={(e => setDescription(e.target.value))}
+                    <Select
+                        style={{height: 40}}
+                        placeholder={<div>Curso</div>}
+                        className="basic-single"
+                        name="form-field-name"
+                        // value={curso}
+                        options={selectCursos}
+                        onChange={e => setCurso(e.value)}
+                    />
+                     <Select
+                        placeholder={<div>Turno</div>}
+                        style={{height: 40}}
+                        className="basic-single"
+                        name="form-field-name"
+                        // value={curso}
+                        options={turnos}
+                        onChange={e => setTurno(e.value)}
                     />
                     
                     

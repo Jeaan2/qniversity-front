@@ -13,7 +13,7 @@ export default function Main() {
 
     useEffect(() => {
 
-          const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         api.get('api/cursos', {
             headers: {
                 Authorization: localStorage.getItem('token')
@@ -45,7 +45,7 @@ export default function Main() {
             <ul>
             {cursos.map(curso => (
                     <li key={curso.id}>
-                    <Link className="card-link" to="/course/"> 
+                    <Link className="card-link" to="/course/" > 
                             <strong>{curso.nome} </strong>
                             <p>{curso.qtdPeriodos} períodos</p>
                     </Link>
