@@ -33,7 +33,7 @@ export default function ClassPage() {
 
     useEffect(() => {
         
-        api.get('api/turmas/1', {
+        api.get(`api/turmas/1`, {
             headers: {
                 Authorization: localStorage.getItem('token')
             } //TODO mudar depois que criar a session
@@ -43,7 +43,11 @@ export default function ClassPage() {
             setAlunos(response.data.data.alunos);
             setQuizzes(response.data.data.quizzes);
 
+            
+
         })
+
+        
     }, [])
  
     const handleToggle = (value) => () => {
@@ -63,9 +67,19 @@ export default function ClassPage() {
         e.preventDefault();
 
     }
+   
     return (
-        <div className="new-incident-container">
+        
+
+        <div className="class-page-container">
             <div className="content">
+            <header>
+              <h1> {turma.nome} </h1>
+              <h2> Código de convite: {turma.codigo} </h2>
+                  <p> Envie este código para os alunos dessa turma, assim eles poderão realizar o cadastro vinculando-se a esta turma.</p>
+            
+            </header>
+            <div className="content-list">
                 <section>
                    <h1>Alunos</h1>
                    <List className={classes.root} style={{height: '400px'}}>
@@ -94,6 +108,7 @@ export default function ClassPage() {
                         })}
                       </List>
                 </section>
+            </div>
             </div>
             
         </div>

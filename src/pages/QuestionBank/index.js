@@ -32,7 +32,7 @@ export default function QuestionBank() {
                 <img src={logoImg} alt="Be the Hero" />
                 
 
-                <Link className="button" to="/newcourse"> Cadastrar nova questão </Link>
+                <Link className="button" to="/newquestion"> Cadastrar nova questão </Link>
                 
                 <button onClick={() => handleLogout()} type="button" >
                     <FiPower size={18} color="#E02041"/>

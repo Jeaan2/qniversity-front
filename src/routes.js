@@ -14,6 +14,8 @@ import Quizzes from './pages/QuizzesPage';
 import Quiz from './pages/QuizPage';
 import Course from './pages/CoursePage';
 import NewQuiz from './pages/NewQuiz';
+import NewQuestion from './pages/NewQuestion';
+
 
 export default function Routes() {
     return (
@@ -25,13 +27,14 @@ export default function Routes() {
                 <Route path="/main" exact component={Main} />
                 <Route path="/newclass" exact component={NewClass} />
                 <Route path="/newcourse" exact component={NewCourse} />
-                <Route path="/class" exact component={ClassPage} />
+                <Route name="class" path="/class/" exact component={ClassPage} />
                 <Route path="/classes" exact component={Classes} />
                 <Route path="/questionbank" exact component={QuestionBank} />
                 <Route path="/quizzes" exact component={Quizzes} />
                 <Route path="/quiz" exact component={Quiz} />
                 <Route path="/course/" exact component={Course} />
                 <Route path="/newquiz/" exact component={NewQuiz} />
+                <Route path="/newquestion/" exact component={NewQuestion} />
 
 
             </Switch>

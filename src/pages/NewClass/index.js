@@ -56,8 +56,9 @@ export default function NewClass() {
         }
     }
     return (
-        <div className="new-incident-container">
+        <div className="new-class-container">
             <div className="content">
+                
                 <section>
 
                    <h1>Cadastrar nova turma</h1>
