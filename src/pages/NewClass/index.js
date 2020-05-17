@@ -17,7 +17,7 @@ export default function NewClass() {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        
+
         api.get('api/cursos', {
             headers: {
                 Authorization: localStorage.getItem('token')
@@ -27,7 +27,7 @@ export default function NewClass() {
             setCursos(response.data.data);
         })
     }, [])
-    
+
     let selectCursos = cursos.map(function (curso) {
         return {value: curso.id, label: curso.nome}
     })
@@ -59,7 +59,7 @@ export default function NewClass() {
         <div className="new-incident-container">
             <div className="content">
                 <section>
-                   
+
                    <h1>Cadastrar nova turma</h1>
                    {/* <p>Descreva o caso detalhadamente para encontrar um herói para resolver isso. </p> */}
 
@@ -70,13 +70,12 @@ export default function NewClass() {
                 </section>
 
                 <form  onSubmit={handleNewClass}>
-                    <input 
+                    <input
                     placeholder="Nome da Turma"
                     value={nome}
                     onChange={(e => setNome(e.target.value))}
                     />
                     <Select
-                        style={{height: 40}}
                         placeholder={<div>Curso</div>}
                         className="basic-single"
                         name="form-field-name"
@@ -86,16 +85,15 @@ export default function NewClass() {
                     />
                      <Select
                         placeholder={<div>Turno</div>}
-                        style={{height: 40}}
                         className="basic-single"
                         name="form-field-name"
                         // value={curso}
                         options={turnos}
                         onChange={e => setTurno(e.value)}
                     />
-                    
-                    
-                        
+
+
+
                     <button className="button" type="submit">Cadastrar </button>
                 </form>
             </div>

@@ -47,8 +47,10 @@
       margin-top: 8px;
   
   }
-  .new-incident-container .content form select {
+  .new-incident-container .content form Select {
     margin-top: 8px;
+    width: 100%;
+    height: 10px;
 
 }
 

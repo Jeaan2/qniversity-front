@@ -45,7 +45,7 @@ export default function Classes() {
             <ul>
             {turmas.map(turma => (
                     <li key={turma.id}>
-                    <Link className="card-link" to="/course/"> 
+                    <Link className="card-link" to="/class/"> 
                             <strong>{turma.nome} </strong>
                             {/* <p>{curso.qtdPeriodos} períodos</p> */}
                     </Link>
