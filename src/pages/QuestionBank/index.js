@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {FiPower, FiTrash2} from 'react-icons/fi';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText'
 import './styles.css'
 
 import api from '../../services/api'
@@ -27,7 +31,7 @@ export default function QuestionBank() {
         history.push('/');
     }
     return (
-        <div className="profile-container">
+        <div className="question-bank-container">
             <header>
                 <img src={logoImg} alt="Be the Hero" />
                 
@@ -43,11 +47,18 @@ export default function QuestionBank() {
             <ul>
                 {questoes.map(questao => (
                     <li key={questao.id}>
-                    <Link className="card-link" to="/course/"> 
+                    
                             <strong>{questao.descricao} </strong>
-                            <p>Nivel: {questao.nivel}</p>
-                            {/* <p>{questao.respostas[]} questões</p> */}
-                    </Link>
+                            <List className={questoes.root} style={{height: '400px'}}>
+                                    {questao.respostas.map((resposta) => {
+                                    const labelId = `checkbox-list-label-${resposta}`;
+                                    return (
+                                        <ListItem key={resposta.id} role={undefined} dense button >
+                                        <ListItemText id={labelId} primary={resposta.descricao} />
+                                        </ListItem>
+                                    );
+                                    })}
+                             </List>
                     </li>
                     
                 ))}

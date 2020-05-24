@@ -54,7 +54,7 @@ export default function NewCourse() {
                 } 
             });
 
-            // history.push('/questionbank')
+             history.push('/questionbank')
 
         } catch(err) {
             alert("Erro ao cadastrar questao, tente novamente")

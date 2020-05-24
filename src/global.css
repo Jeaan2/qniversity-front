@@ -90,6 +90,10 @@ form textarea {
     transition: filter 0.2s;
 }
 
+.answers-list {
+    display: inline;
+}
+
 .button:hover {
     filter: brightness(90%);
 }

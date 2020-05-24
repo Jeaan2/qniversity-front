@@ -87,9 +87,11 @@ export default function NewQuiz() {
                 headers: {
                     Authorization: localStorage.getItem('token')
                 } 
+            }).then(() => {
+                history.push('/quizzes')
             });
 
-            history.push('/quizzes')
+            
 
         } catch(err) {
             alert("Erro ao cadastrar turma, tente novamente")
@@ -133,7 +135,7 @@ export default function NewQuiz() {
                     <p>Ativo</p>
                     </div>
                     <p>Perguntas</p>
-                    <List className={classes.root}>
+                    <List className={classes.root} style={{maxHeight: 300, overflow: 'auto'}}>
                         {questoes.map((questao) => {
                             const labelId = `checkbox-list-label-${questao}`;
 
