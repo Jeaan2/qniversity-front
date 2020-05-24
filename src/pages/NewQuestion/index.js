@@ -41,7 +41,7 @@ export default function NewCourse() {
 
         console.log("id: "+id)
         const data = {
-            id: Math.floor(Math.random() * 10),
+            id: Math.floor(Math.random() * 10000),
             descricao,
             nivel: nivel,
             respostas
@@ -54,7 +54,7 @@ export default function NewCourse() {
                 } 
             });
 
-            history.push('/questionbank')
+            // history.push('/questionbank')
 
         } catch(err) {
             alert("Erro ao cadastrar questao, tente novamente")
@@ -63,7 +63,7 @@ export default function NewCourse() {
 
     function handleAddAnswer() {
         respostas.push({
-            id: 10,
+            id: Math.floor(Math.random() * 10000),
             descricao: resposta,
             correta: false
         })
