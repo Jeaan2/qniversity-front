@@ -49,12 +49,12 @@ export default function QuestionBank() {
                     <li key={questao.id}>
                     
                             <strong>{questao.descricao} </strong>
-                            <List className={questoes.root} style={{height: '400px'}}>
+                            <List className={questoes.root} style={{maxHeight: 200, overflow: 'auto'}}>
                                     {questao.respostas.map((resposta) => {
                                     const labelId = `checkbox-list-label-${resposta}`;
                                     return (
                                         <ListItem key={resposta.id} role={undefined} dense button >
-                                        <ListItemText id={labelId} primary={resposta.descricao} />
+                                        <ListItemText id={labelId} primary={resposta.descricao} secondary={resposta.correta ? "Correta" : ""}/>
                                         </ListItem>
                                     );
                                     })}

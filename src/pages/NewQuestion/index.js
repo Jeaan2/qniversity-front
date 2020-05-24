@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NewCourse() {
     const [descricao, setDescricao] = useState('');
     const [resposta, setResposta] = useState('');
+    const [correta, setCorreta] = useState(false);
     const [nivel, setNivel] = useState('FACIL');
     const [respostas, setRespostas] = useState([]);
     const history = useHistory();
@@ -55,9 +56,18 @@ export default function NewCourse() {
             });
 
              history.push('/questionbank')
+             
 
         } catch(err) {
             alert("Erro ao cadastrar questao, tente novamente")
+        }
+    }
+
+    function handleChecked() {
+        if (correta) {
+            setCorreta(false)
+        } else {
+            setCorreta(true)
         }
     }
 
@@ -65,9 +75,10 @@ export default function NewCourse() {
         respostas.push({
             id: Math.floor(Math.random() * 10000),
             descricao: resposta,
-            correta: false
+            correta: correta
         })
         setResposta('');
+        setCorreta(false);
     }
 
     const handleToggle = (value) => () => {
@@ -101,6 +112,17 @@ export default function NewCourse() {
                     value={resposta}
                     onChange={(e => setResposta(e.target.value))}
                     />
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                     <Checkbox
+                        edge="start"
+                        checked={correta}
+                        onChange={handleChecked}
+                        tabIndex={-1}
+                        disableRipple
+                        // inputProps={{ 'aria-labelledby': labelId }}
+                    />
+                    <p>Correta</p>
+                    </div>
                      <button className="button" onClick={handleAddAnswer}>Adicionar </button>
                    <Link className="back-link" to="/main">
                     <FiArrowLeft size={16} color="#E02041" />
